@@ -1,0 +1,32 @@
+<div class="container">
+  <div *ngIf="!isSomething" class="container text-center">
+    <h1 class="my-3">Nessun prodotto nel carrello!</h1>
+    <button [routerLink]="['/']" class="btn btn-primary">Torna alla home</button>
+  </div>
+
+  <div class="pt-3" *ngIf="isSomething">
+    <h1>Articoli</h1>
+    <div class="pb-3 d-flex" *ngFor="let product of cart, index as i">
+      <li style="width: 100%;" class="list-group-item d-flex justify-content-between align-items-center"> {{product.name}}
+        <span class="badge bg-primary badge-pill align-left">{{product.price}}</span>
+      </li>
+      <button (click)="deleteProduct(i)" class="btn btn-danger ml-1">X</button>
+    </div>
+
+    <button (click)="emptyCart()" class="btn btn-primary mt-4">Svuota carrello</button>
+    <h1 class="pt-5">Completa ordine</h1>
+      <div>
+        <label for="nome">Nome</label>
+        <input [(ngModel)]="name" type="text" class="form-control" id="nome" aria-describedby="nome" placeholder="Inserisci il tuo nome">
+        <label for="cognome">Cognome</label>
+        <input [(ngModel)]="surname" type="text" class="form-control" id="cognome" aria-describedby="cognome" placeholder="Inserisci il tuo cognome">
+        <label for="indirizzo">Indirizzo</label>
+        <input [(ngModel)]="address" type="text" class="form-control" id="Indirizzo" placeholder="Inserisci il tuo indirizzo">
+        <br>
+      <button (click)="sendOrder()" type="submit" class="btn btn-primary">Crea ordine</button>
+      <button (click)="emptyForm()" type="submit" class="btn btn-primary mx-2">Svuota form</button>
+      </div>
+      <h1 class="pt-5">Potrebbero anche interessarti</h1>
+      <app-home></app-home>
+    </div>
+</div>

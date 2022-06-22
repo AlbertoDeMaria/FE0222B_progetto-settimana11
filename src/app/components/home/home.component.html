@@ -1,0 +1,30 @@
+<div *ngIf="products && !isLoading" class="d-flex justify-content-around align-items-center pt-3">
+  <div class="card" *ngFor="let product of products, index as i"  style="width: 18rem;">
+    <img class="card-img-top" src="../../../assets/images/{{product.id}}.jpg" alt="Product image">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="card-title">{{product.name}}</h5>
+        <p class="badge bg-primary badge-pill">{{product.price}}</p>
+      </div>
+      <p class="card-text">{{product.description}}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <a (click)="addToCart(i)" class="btn btn-primary">Aggiungi al carrello</a>
+        <a href="#" [routerLink]="['/product',product.id,product.name,product.price,product.description]" routerLinkActive="active"   [routerLinkActiveOptions]="{exact: true}" class="link">Dettagli</a>
+      </div>
+    </div>
+    <p *ngIf="!products && !isLoading">ops non ci sono prodotti</p>
+  </div>
+</div>
+
+<!-- in caso di errore -->
+<div *ngIf="error" class="container alert alert-danger mt-3">
+  <h3>Ops errore</h3>
+  <p>{{this.error}}</p>
+</div>
+
+<!-- loading animation di bootstrap -->
+<div class="d-flex justify-content-center mt-3">
+  <div *ngIf="isLoading && !error" class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+</div>
